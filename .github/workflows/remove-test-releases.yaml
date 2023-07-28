@@ -26,6 +26,7 @@ jobs:
 
       - name: Checkout to gh-pages
         run: |
+          git fetch
           git checkout gh-pages
       
       - name: remove test charts in index file

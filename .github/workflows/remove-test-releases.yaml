@@ -1,0 +1,48 @@
+name: Remove Test Releases
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  0 2 * * 1
+
+env:  
+  GIT_USER: "svc-dot-bot"
+  GIT_EMAIL: "svc-dot-bot@digitalroute.com"
+
+jobs:
+  remove:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Config git
+        run: |
+          git config --global user.name "${{ env.GIT_USER }}"
+          git config --global user.email "${{ env.GIT_EMAIL }}"
+
+      - name: Checkout to gh-pages
+        run: |
+          git fetch
+          git checkout gh-pages
+      
+      - name: remove test charts in index file
+        run: |
+          cat << EOF > index.yaml
+          apiVersion: v1
+          entries:
+            usage-engine-private-edition:
+          generated: "2023-02-27T14:54:15.008712628Z"
+          EOF
+          git commit -am "clean up test charts"
+          git push origin gh-pages
+
+      - name: Remove test releases
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh release list --limit 1000 |
+          awk '{print $1}' |
+          xargs -I% gh release delete --yes --cleanup-tag %

@@ -3,6 +3,21 @@ entries:
   usage-engine-private-edition:
   - apiVersion: v2
     appVersion: 5.2.2
+    created: "2026-05-21T09:52:01.248018507Z"
+    dependencies:
+    - alias: operator
+      condition: operator.enabled
+      name: usage-engine-private-edition-operator
+      repository: https://digitalroute.github.io/uep-test-release/
+      version: 5.2.2-test5
+    description: The Usage Engine Private Edition helm chart
+    digest: 17426a5bd5c20ca9ed1695c6397d74a82bd0b6b9894e390a85dc94d93e52b2a9
+    name: usage-engine-private-edition
+    urls:
+    - https://github.com/digitalroute/uep-test-release/releases/download/usage-engine-private-edition-5.2.2-test5/usage-engine-private-edition-5.2.2-test5.tgz
+    version: 5.2.2-test5
+  - apiVersion: v2
+    appVersion: 5.2.2
     created: "2026-05-20T19:33:32.594554924Z"
     dependencies:
     - alias: operator
@@ -412,4 +427,4 @@ entries:
     urls:
     - https://github.com/digitalroute/uep-test-release/releases/download/usage-engine-private-edition-operator-4.1.0-test1/usage-engine-private-edition-operator-4.1.0-test1.tgz
     version: 4.1.0-test1
-generated: "2026-05-21T09:51:15.711065513Z"
+generated: "2026-05-21T09:52:01.248462175Z"
